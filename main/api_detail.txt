@@ -1,0 +1,66 @@
+login: /api/login/
+  input:
+    type: json
+    format: {
+            "username": "mayur",
+            "password": "admin",
+          }
+  
+  response:
+    type : json
+    format:
+      {"cause": "", "data":"" or {}, "code": 200, "detail": "successful login"}
+    possible response codes:
+      404 : user not found
+      405 : use post method
+      406 : invalid field data
+      200 : successfullsignup
+
+signup: /api/signup/
+  input:
+    type: json
+    format: {
+            "username": "mayur",
+            "password": "admin",
+            "fullname": "mayur kukadiya", // space between 2 name is recommanded
+            "email": "mayurkukaidya0@gmail.com",
+            "role": "1", // can be 0 of normal user
+            "mobile": "7845124578",
+            "address": "c-803, blossom homes , motavarachha, surat",
+            "pincode": "395101"
+          }
+  
+  response:
+    type : json
+    format:
+      {"cause": "", "data":"" or {}, "code": 200, "detail": "successful signup"}
+    possible response codes:
+      405 : use post method
+      406 : invalid field data
+      200 : successfullsignup
+
+
+add_room: /api/add/room/
+  input:
+    type: formdata
+    dict: {
+            "price": 100,
+            "room_name": "room 1",
+            "facilities": "1bed,1table,...", 
+            "photo1": blobfile (binary file or base64),
+            "photo2": blobfile (binary file or base64), 
+            .
+            .
+            .
+          }
+  
+  response:
+    type : json
+    format:
+      {"cause": "", "data":"", "code": 200, "detail": "room added successfully"}
+    possible response codes:
+      405 : use post method
+      406 : invalid fields
+      200 : successfullsignup
+
+# further api desc is panding and written once completed

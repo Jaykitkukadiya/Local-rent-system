@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% csrf_token %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OnBoard status</title>
+    <link rel="stylesheet" href="{% static 'css/onbstatus.css' %}">
+    <link rel="stylesheet" href="{% static 'css/common.css' %}">
+    <script src="{% static 'js/onbstatus.js' %}"></script>
+    
+</head>
+<body>
+    <div class="bdy">
+        {% if onboarding_status == "2" %}
+        <div class="message-box">
+            <div class="message-box-symbol-container">
+                <img src="{% static '/icon/checked.png' %}" alt='' class="message-box-symbol" />
+            </div>
+            <div class="message-box-text">Great!, You Been Successfully Link Your Stripe Account With Us. For More Detail Goto <b>Dashboard > Payment > Bank Detail</b>.</div>
+            <div class="message-box-btn-container">
+                <a href="/landlord/dashboard/"><div class="message-box-btn">Dashboard</div></a>
+            </div>
+        </div>
+        {% else %}
+        <div class="message-box" id="message_box">
+            <div class="message-box-symbol-container">
+                <img src="{% static '/icon/warn.png' %}" alt='' class="message-box-symbol " />
+            </div>
+            <div class="message-box-text ">Opps!, It's Looks Like You Didn't Complete Onboarding Process. We Recommand To Retry.</div>
+            <div class="message-box-text redtxt hidden" id="message"></div>
+            <div class="message-box-btn-container">
+                <div class="message-box-btn redbtn" onclick="bank_connect('{{acc_id}}')">Retry</div>
+                <a href="/landlord/dashboard/"><div class="message-box-btn">Dashboard</div></a>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="selec hidden" id="retry_rounder">
+            <div class="rounder">
+              <span class="rounder-dots" style="--loderPoints:1"></span>
+              <span class="rounder-dots" style="--loderPoints:2"></span>
+              <span class="rounder-dots" style="--loderPoints:3"></span>
+              <span class="rounder-dots" style="--loderPoints:4"></span>
+              <span class="rounder-dots" style="--loderPoints:5"></span>
+              <span class="rounder-dots" style="--loderPoints:6"></span>
+              <span class="rounder-dots" style="--loderPoints:7"></span>
+              <span class="rounder-dots" style="--loderPoints:8"></span>
+              <span class="rounder-dots" style="--loderPoints:9"></span>
+              <span class="rounder-dots" style="--loderPoints:10"></span>
+              <span class="rounder-dots" style="--loderPoints:11"></span>
+              <span class="rounder-dots" style="--loderPoints:12"></span>
+              <span class="rounder-dots" style="--loderPoints:13"></span>
+              <span class="rounder-dots" style="--loderPoints:14"></span>
+              <span class="rounder-dots" style="--loderPoints:15"></span>
+              <span class="rounder-dots" style="--loderPoints:16"></span>
+              <span class="rounder-dots" style="--loderPoints:17"></span>
+              <span class="rounder-dots" style="--loderPoints:18"></span>
+              <span class="rounder-dots" style="--loderPoints:19"></span>
+              <span class="rounder-dots" style="--loderPoints:20"></span>
+            </div>
+          </div>
+    </div>
+
+
+    <script>
+        var onboard_status = "{{ onboarding_status }}";
+    </script>
+</body>
+</html>

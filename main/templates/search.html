@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  {% csrf_token %}
+  {% csrf_token %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="36782399705-3u7lsedvcjubi2p6nrs6jclffl1luanb.apps.googleusercontent.com">
+  <title>search</title>
+  
+  <!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDzscb1NF7BS9BUTR17ftaAobbJ9t84cZQ&callback=initMap"></script> -->
+  </script>
+  <link rel="stylesheet" href="{% static 'css/search.css' %}">
+  <script src="https://js.stripe.com/v3/"></script> 
+  <script>
+    
+    let location_data = new Array();
+    let room_data = new Array();
+    const stripe = Stripe("{{public}}");
+    let location_icon = location.protocol + '//' + location.host + "{% static 'icon/location.png' %}"
+    let pin_icon = location.protocol + '//' + location.host + "{% static 'icon/mappin1.png' %}"
+    let hotel_icon = location.protocol + '//' + location.host + "{% static 'icon/hotel.png' %}"
+
+    // console.log(JSON.parse("{{room_data}}".replaceAll("&#x27;", "'").replaceAll("&quot;", '"')))
+  </script> {% for rdata in room_data %}
+  <script>
+    room_data.push(JSON.parse("{{rdata}}".replaceAll("&#x27;", '"').replaceAll("&quot;", '"')))
+      // console.log(JSON.parse("{{rdata}}".replaceAll("&#x27;", '"').replaceAll("&quot;", '"')))
+      // console.log("{{rdata}}".replaceAll("&#x27;", '"').replaceAll("&quot;", '"'))
+  </script>
+  {% endfor %}
+
+
+  <script src="{% static 'js/search.js' %}"></script>
+</head>
+
+<body>
+  <div class="main-container">
+    <div class="info-window" id="info-window">
+      <div class="info-close-container">
+        <img class="info-close-btn" id="info-window-closed" src="{% static 'icon/back.png' %}" alt="">
+        <p class="info-title">
+          Details
+        </p>
+
+
+      </div>
+      <div class="info-field">
+        <p class="info-field-heading">
+          name
+        </p>
+        <p class="info-field-details" id="info_window_owner_name">
+          hareshsutariya
+        </p>
+
+      </div>
+      <div class="info-field">
+        <p class="info-field-heading">
+          Address
+        </p>
+        <p class="info-field-details" id="info_window_address">
+          c 803, blossom homes, near abc cirle,sudama chowk, mota varachha, surat - 394101
+        </p>
+
+      </div>
+      <div class="info-field">
+        <p class="info-field-heading">
+          Contact Number
+        </p>
+        <p class="info-field-details" id="info_window_contact">
+          7878333205
+        </p>
+
+      </div>
+      <p class="info-title-inter">
+        Available Rooms
+      </p>
+
+      <div class="info-room-container" id="info_window_room_container">
+        <div class="info-room-details-container">
+          <div class="info-room-title-container">
+            <div class="info-room-title">Room 1</div>
+            <img class="info-room-drop-btn" src="{% static 'icon/arrow1.png' %}" id="info_room_drop_btn" alt="">
+          </div>
+          <div class="info-room-drop-detail-container hidden" id="info_room_drop_btn_block">
+            <div class="info-field room-info-field ">
+              <p class="info-field-heading">
+                price
+              </p>
+              <p class="info-field-details">
+                554 INR
+              </p>
+
+            </div>
+            <div class="info-field room-info-field ">
+              <p class="info-field-heading">
+                rating
+              </p>
+              <p class="info-field-details">
+                4 stars
+              </p>
+
+            </div>
+            <div class="info-field room-info-field ">
+              <p class="info-field-heading">
+                Facility
+              </p>
+              <p class="info-field-details">
+                <span class="room-info-facility">1 bedroom</span>
+                <span class="room-info-facility">1 bathroom</span>
+                <span class="room-info-facility">electricity</span>
+                <span class="room-info-facility">internet</span>
+                <span class="room-info-facility">table</span>
+                <span class="room-info-facility">fan</span>
+                <span class="room-info-facility">fully furnished</span>
+              </p>
+
+            </div>
+            <div class="info-field room-info-field ">
+              <p class="info-field-heading">
+                Images
+              </p>
+              <p class="info-field-details">
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+                <span class="room-info-photos"><a href="/media/room_photos/2_Orange_fone.jpg" target="_blank"><img src="/media/room_photos/2_Orange_fone.jpg" alt=""></a></span>
+
+              </p>
+
+            </div>
+            <div class="info-field room-info-fields">
+              <div class="room-info-inquiry-btn">Inquery</div>
+
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="nav-container" id="search_nav">
+      <img class="nav-logo" src="{% static 'icon/lc1.svg' %}" alt="">
+      <div class="nav-detail-container">
+        <input class="nav-search-inp" id="search_inp" type="text">
+        <img class="nav-search-btn" id="search_btn" src="{% static 'icon/search1.png' %}" alt="">
+      </div>
+      <div class="nav_btns">
+        <a href="#" onclick="redtodash();"><div class="nav-detail-dashboard-btn">dashboard</div></a>
+        <a href="#" onclick="signOut();"><div class="nav-detail-logout-btn">Logout</div></a>
+      </div>
+    </div>
+    <div class="body-container" id="map"></div>
+  </div>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap"> -->
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap">
+  </script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+</body>
+
+</html>

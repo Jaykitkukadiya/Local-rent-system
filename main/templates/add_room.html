@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  {% csrf_token %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add room</title>
+  <link rel="stylesheet" href="{% static 'css/add_room.css' %}">
+  <script src="{% static 'js/add_room.js' %}"></script>
+</head>
+
+<body>
+  <div class="navbar">
+    <img class="navbar-logo" src="{% static 'icon/lc1.svg' %}" alt="Logo">
+    <div class="navbar-btn-container">
+      <p class="navbar-btn">Skip</p>
+    </div>
+  </div>
+  <div class="bdy">
+
+    <div class="popup-container hidd" id="add_room_popup">
+      <div class="popup-box">
+
+        <div class="preview-img-container">
+          <input id="add_room_add_img" type="File" class="hidd" accept="image/*">
+          <img class="preview-img-add" id="add_room_add_img_btn" src="{% static 'icon/plus_box.svg' %}" alt="">
+          <div class="preview-img-inner-container" id="add_room_preview_img_container">
+
+          </div>
+        </div>
+        <div class="add-room-inp-container">
+          <div class="inp-container-fac">
+            <input class="inp-field" style="padding-right: 30px;width: calc(100% - 100px);" id="facility_tag_text" placeholder="Facilities" type="text">
+            <p class="inp-lable">Facilities</p>
+            <p class="inp-add-btn" id="add_facility_tag">Add</p>
+          </div>
+          <div class="inp-container-price">
+            <input class="inp-field" id="add_room_price" placeholder="price per night" type="text">
+            <p class="inp-lable">Price</p>
+          </div>
+        </div>
+        <div class="facility-container" id="facility_tag_container">
+
+        </div>
+        <div class="bdy-rooms-continue-btn-container" style="justify-content: space-around; width: calc(100% - 30px); align-items: flex-end;">
+          <div class="inp-container-price">
+            <input class="inp-field" id="add_room_name" placeholder="Room name" type="text">
+            <p class="inp-lable">Room Name</p>
+          </div>
+          <p class="bdy-rooms-continue-btn" id="add-room-popup-closer">Close</p>
+          <p class="bdy-rooms-continue-btn" id="add_room_popup_tag_clear_btn">Clear</p>
+          <p class="bdy-rooms-continue-btn" id="add_room_btn">Add</p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="bdy-add-room-btn-container" id="initial_add_comonent">
+      <img class="bdy-add-room-btn" id="add-room-popup-opner-initial" src="{% static 'icon/plus.svg' %}" alt="Add_room" id="add_initial_room">
+    </div>
+
+    <div class="bdy-rooms-container hidd" id="followed_rooms_component">
+
+      <div class="bdy-rooms-inner-container">
+        <div class="bdy-rooms-arrow-container">
+          <img class="bdy-rooms-arrow" id="cards_scroll_left" src="{% static 'icon/leftarrow.svg' %}" alt="arrow">
+        </div>
+        <div class="bdy-rooms-final-outer-container">
+          <div class="bdy-rooms-final-inner-container" id="card_container">
+
+
+            <div class="bdy-room-card" id="add-room-popup-opner">
+              <img class="bdy-room-card-img" src="{% static 'icon/plus.svg' %}" style="opacity: 60%;" alt="">
+            </div>
+            <div class="bdy-room-card-body" id="card_container_inner">
+              <!-- <div class="bdy-room-card">
+                                <img class="bdy-room-card-img" src="sampleroom.jpg" alt="">
+                                <div class="bdy-room-card-title-container">
+                                    <p class="bdy-room-card-title">Room1</p>
+                                    <p class="bdy-room-card-title">RS.500 per night</p>
+                                </div>
+                            </div> -->
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bdy-rooms-arrow-container">
+          <img class="bdy-rooms-arrow" id="cards_scroll_right" src="{% static 'icon/rightarrow.svg' %}" alt="arrow">
+        </div>
+      </div>
+
+      <div class="bdy-rooms-continue-btn-container">
+        <p class="bdy-rooms-continue-btn">Continue</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

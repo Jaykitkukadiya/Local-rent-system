@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 206" style="enable-background:new 0 0 512 206;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#28292C;}
+	.st2{fill:#4D76FB;stroke:#4D76FB;stroke-width:8;stroke-miterlimit:10;}
+	.st3{font-family:'MyriadPro-Regular';}
+	.st4{font-size:69.2346px;}
+	.st5{fill:none;stroke:#FFFFFF;stroke-width:8;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#4D76FB;stroke-width:7;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#28292C;stroke-width:5;stroke-miterlimit:10;}
+	.st8{font-size:67.3905px;}
+	.st9{display:none;fill:none;stroke:#28292C;stroke-width:2;stroke-miterlimit:10;}
+	.st10{display:none;fill:none;stroke:#FFFFFF;stroke-width:2;stroke-miterlimit:10;}
+</style>
+<g>
+	<circle class="st0" cx="204.89" cy="72.06" r="29.94"/>
+	<path class="st1" d="M204.89,45.62c14.58,0,26.44,11.86,26.44,26.44c0,14.58-11.86,26.44-26.44,26.44s-26.44-11.86-26.44-26.44
+		C178.45,57.48,190.31,45.62,204.89,45.62 M204.89,38.62c-18.47,0-33.44,14.97-33.44,33.44s14.97,33.44,33.44,33.44
+		s33.44-14.97,33.44-33.44S223.36,38.62,204.89,38.62L204.89,38.62z"/>
+</g>
+<path class="st2" d="M248.21,100.18c5.57,3.83,1.85,20.63-4.56,31.92c-1.51,2.65-9.55,16.24-28.88,24.32
+	c-23.27,9.72-30.14-2.23-54.72,4.56c-23.17,6.4-22.17,18.43-51.68,27.36c-17.17,5.19-29.59,4.77-33.44,4.56
+	c-13.57-0.74-30.06-1.65-41.09-14.77c-8.4-9.99-12.93-26.02-7.54-38.43c4.91-11.32,14.33-11.06,29.64-25.08
+	c8.04-7.37,9.08-10.78,22.8-30.4c21.99-31.46,33.28-47.38,47.88-57c16.9-11.13,31.5-13.25,39.52-13.68
+	c11.05-0.6,28.83,1.02,30.4,7.6c1.97,8.26-24.43,12.73-33.44,34.96c-5.65,13.94-3.7,33.02,7.6,45.6
+	c13.84,15.41,35.28,13.91,38,13.68C231.18,113.45,241.88,95.82,248.21,100.18z"/>
+<text transform="matrix(0.9918 0 0 1 241.1001 92.7471)" class="st1 st3 st4">Ca</text>
+<path class="st5" d="M179.05,23.42c-6.72,1.27-20.92,4.98-27.36,16.72c-3.18,5.79-3.07,11.01-3.04,18.24
+	c0.24,49.34-3.41,55.84,4.56,66.88c5.52,7.65,12.47,11.72,16.72,13.68c16.31,7.51,32.33,1.96,38,0
+	c14.93-5.17,14.89-16.98,28.88-21.28c8.48-2.6,16.36-1.3,21.28,0"/>
+<ellipse class="st0" cx="179.05" cy="23.42" rx="4.56" ry="6.08"/>
+<polyline class="st6" points="322.69,32.54 322.69,120.34 322.69,152.61 "/>
+<polyline class="st7" points="336.36,91.82 336.36,136.27 336.36,152.61 "/>
+<text transform="matrix(1 0 0 1 347.2295 152.0889)" class="st1 st3 st8">ease</text>
+<path d="M580.31,184.53"/>
+<rect x="119" y="129" class="st9" width="12" height="12"/>
+<rect x="135" y="121" class="st10" width="12" height="12"/>
+<rect x="119" y="145" class="st10" width="12" height="12"/>
+<rect x="135" y="137" class="st9" width="12" height="12"/>
+</svg>

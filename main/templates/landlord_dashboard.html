@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %} {% load post_tags %}
+  {% csrf_token %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <script src="{% static 'js/font.js' %}"></script>
+
+  <link rel="stylesheet" href="{% static 'css/landlord_dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'css/common.css' %}">
+
+  <!-- fonts  start-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <!-- fonts end -->
+</head>
+
+<body>
+
+  <nav class="nav">
+    <img src="{% static 'icon/lc1.svg' %}" alt="" class="logo">
+    <div class="nav-detail-btn-container">
+      <i class="far fa-bell notification-icon"></i>
+    </div>
+  </nav>
+
+
+  <!-- main page starts -->
+
+  <div class="bdy">
+    <div class="sidebar">
+      <div class="sidebar-section" id="add_room_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/A.svg' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Add Room</p>
+      </div>
+      <div class="sidebar-section" id="manage_room_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/M.svg' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Manage Room</p>
+      </div>
+      <div class="sidebar-section" id="payment_history_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/P.svg' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Payment History</p>
+      </div>
+      <div class="sidebar-section" id="profile_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/P.svg' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Profile</p>
+      </div>
+      <div class="sidebar-section" id="contact_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/C.svg' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Contact Us</p>
+      </div>
+    </div>
+    <div class="page-container ">
+
+      <!-- add room starts -->
+
+      <div class="addroom-container hidden" id="add_room_page">
+        <div class="addroom-page">
+          <h2 class="add-room-heading">Add New Room</h2>
+          <div class="field-container">
+            <div class="lable-container">Name</div>
+            <div class="inp-container"><input type="text" id="add_room_name" class="add-room-inp" placeholder="Room 1">
+            </div>
+          </div>
+          <div class="field-container">
+            <div class="lable-container">Price</div>
+            <div class="inp-container"><input type="text" id="add_room_price" class="add-room-inp" placeholder="INR / night"></div>
+          </div>
+          <div class="field-container">
+            <div class="lable-container">Facility</div>
+            <div class="inp-container"><input id="add_room_facility_inp" type="text" class="add-room-inp" placeholder="Press Enter To Add New"></div>
+          </div>
+          <div class="field-container">
+            <div class="lable-container"></div>
+            <div class="inp-container" id="add_room_facilities">
+
+            </div>
+          </div>
+          <div class="field-container">
+            <div class="lable-container">Image</div>
+            <input type="file" class="add-room-photo-inp" id="add_room_photo_btn" accept="image/*">
+            <div class="inp-container"><button type="button" id="add_room_photo_btn_visual_btn" class="add-room-inp-btn">Add Room Image</button>
+            </div>
+          </div>
+          <div class="field-container">
+            <div class="lable-container"></div>
+            <div class="inp-container" style="overflow-x: auto !important; overflow-y: hidden !important;">
+              <div class="inp-container-photo" id="add_room_img_container">
+
+              </div>
+
+            </div>
+          </div>
+          <div class="field-container">
+            <div class="lable-container"></div>
+            <div class="inp-container">
+              <button type="button" class="add-room-inp-btn" id="add_room_btn">Add Room</button>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+      <!-- add room ends -->
+
+      <!-- manage room starts -->
+      <div class="manageroom-container hidden" id="manage_room_page">
+
+
+        <div class="manageroom-inner-container">
+          <h2 class="manage_room_heading">Rooms</h2>
+
+          <div class="manageroom-table">
+            <div class="manageroom-basic-header">
+              <div class="namegeroom-basi-header-rname">Room name</div>
+              <div class="namegeroom-basi-header-rating">rating</div>
+              <div class="namegeroom-basi-header-occupided">occupided</div>
+              <div class="namegeroom-basi-header-price">price</div>
+              <div class="namegeroom-basi-header-status">status</div>
+              <div class="namegeroom-basi-header-go"></div>
+            </div>
+
+            {% for roomobj in room_data %}
+            <div class="manageroom-basic-data-container">
+              <div class="manageroom-basic-data">
+                <div class="namegeroom-basi-header-rname-data">{{roomobj.room_name}}</div>
+                <div class="namegeroom-basi-header-rating-data">{{roomobj.rate}} Star</div>
+                <div class="namegeroom-basi-header-occupided-data">{{roomobj.n_time_occupied}}</div>
+                <div class="namegeroom-basi-header-price-data">{{roomobj.avg_price}} INR</div>
+                <div class="namegeroom-basi-header-status-data">{{roomobj.status}}</div>
+                <div class="namegeroom-basi-header-go-data">
+                  {% if roomobj.status == 'free' %}
+                  <div class="manageroom-bacis-continue" onclick="manage_room_allocate('{{roomobj.id}}')" id="manage_room_allocate_{{roomobj.id}}">Allocate</div>
+                  {% elif roomobj.status == 'occupied' %}
+                  <div class="manageroom-bacis-continue" onclick="manage_room_detail('{{roomobj.id}}')" id="manage_room_detail_basic_{{roomobj.id}}">Detail</div>
+                  {% elif roomobj.status == 'blocked' %}
+                  <div class="manageroom-bacis-continue  btn-blocked" onclick="blocked_room_detail('{{roomobj.id}}')" id="manage_room_detail_basic_{{roomobj.id}}">Detail</div>
+                  <div class="manageroom-bacis-continue  btn-blocked" onclick="unblocked_room('{{roomobj.id}}')">Unblock</div>
+                  {% endif %}
+                </div>
+              </div>
+
+
+              {% if roomobj.status == 'occupied' %}
+              <div class="manageroom-basic-data-detail" id="manage_room_detail_basic_container_{{roomobj.id}}">
+                <div class="manageroom-basic-data-detail-container">
+                  <div class="manageroom-basic-data-detail-container-first">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Customer Name</div>
+                      <div class="manageroom-basic-user-info-field-text">{% getfilter roomobj "name" %}</div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Price Payed</div>
+                      <div class="manageroom-basic-user-info-field-text">{% getfilter roomobj "price_payed" %}</div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Stay Time</div>
+                      <div class="manageroom-basic-user-info-field-text">{% getfilter roomobj "staytime" %}</div>
+                    </div>
+                  </div>
+                  <div class="manageroom-basic-data-detail-container-middle">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Start Date & Time</div>
+                      <div class="manageroom-basic-user-info-field-text">{% getfilter roomobj "occupied_time" %}</div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Document Type</div>
+                      <div class="manageroom-basic-user-info-field-text">
+                        <a href="/media/{% getfilter roomobj 'document' %}" target="_blank">{% getfilter roomobj "document_type" %}</a>
+                      </div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">
+                        <div class="manageroom-bacis-continue" onclick="deallocate_room('{{roomobj.id}}')">Deallocate
+                        </div>
+                      </div>
+                      <div class="manageroom-basic-user-info-field-text"><input id="change_stay_time_{{roomobj.id}}" type="text" placeholder="Change Stay Time If Any" class="change-stay-time-field hidden"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="namegeroom-basic-header-go-data-detail">
+                  <div class="manageroom-rating-div hidden" id="manageroom_rating_container_{{roomobj.id}}">
+                    <h3 class="customer-feedback-heading">Customer's FeedBack</h3>
+                    <div class="manageroom-rating-div-final">
+                      <div class="feedback">
+                        <label class="angry">
+                          <input type="radio" value="1" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="mouth">
+                              <use xlink:href="#mouth">
+                            </svg>
+                          </div>
+                        </label>
+                        <label class="sad">
+                          <input type="radio" value="2" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="mouth">
+                              <use xlink:href="#mouth">
+                            </svg>
+                          </div>
+                        </label>
+                        <label class="ok">
+                          <input type="radio" value="3" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div></div>
+                        </label>
+                        <label class="good">
+                          <input type="radio" value="4" name="manageroom_feedback_{{roomobj.id}}" checked />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="mouth">
+                              <use xlink:href="#mouth">
+                            </svg>
+                          </div>
+                        </label>
+                        <label class="happy">
+                          <input type="radio" value="5" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                          </div>
+                        </label>
+                      </div>
+
+                      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 4" id="eye">
+                          <path
+                            d="M1,1 C1.83333333,2.16666667 2.66666667,2.75 3.5,2.75 C4.33333333,2.75 5.16666667,2.16666667 6,1">
+                          </path>
+                        </symbol>
+                        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 7" id="mouth">
+                          <path d="M1,5.5 C3.66666667,2.5 6.33333333,1 9,1 C11.6666667,1 14.3333333,2.5 17,5.5"></path>
+                        </symbol>
+                      </svg>
+
+                    </div>
+                    <div>
+                      <div class="manageroom-bacis-continue" onclick="deallocate_room_final('{{roomobj.id}}')">
+                        Deallocate Now!</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              {% elif roomobj.status == 'free' %}
+              <div class="manageroom-basic-data-detail" id="manage_room_allocating_basic_container_{{roomobj.id}}">
+                <div class="manageroom-basic-data-detail-container">
+                  <div class="manageroom-basic-data-detail-container-first">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Customer Name</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="Jaykit Kukadiya" id="allocate_room_inp_name_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Price</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="500 In INR" id="allocate_room_inp_price_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Stay Time</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="1 In Days" id="allocate_room_inp_staytime_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                  </div>
+                  <div class="manageroom-basic-data-detail-container-middle">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Document Type</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="Document Name" id="allocate_room_inp_documenttype_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Document </div>
+                      <div class="manageroom-basic-user-info-field-text">
+                        <input type="file" id="allocate_room_inp_document_{{roomobj.id}}" class="allocateroom-inp-field hidden">
+                        <div class="manageroom-bacis-continue" onclick="allocate_document_trigger(event,'{{roomobj.id}}')" style=" white-space: nowrap;
+                        overflow: hidden;text-overflow: ellipsis; max-width: 150px;" id="allocate_room_inp_document_btn_{{roomobj.id}}">Choose Document</div>
+                      </div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">
+                        <div class="manageroom-bacis-continue" onclick="allocate_room('{{roomobj.id}}')">allocate</div>
+                      </div>
+                      <div class="manageroom-basic-user-info-field-text"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="namegeroom-basic-header-go-data-detail">
+
+
+                </div>
+              </div>
+              {% elif roomobj.status == 'blocked' %}
+              <div class="manageroom-basic-data-detail" id="blocked_room_detail_basic_container_{{roomobj.id}}">
+                <div class="manageroom-basic-data-detail-container">
+                  <div class="manageroom-basic-data-detail-container-first">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Email</div>
+                      <div class="manageroom-basic-user-info-field-text" id="blocked_room_detail_email_{{roomobj.id}}"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable" >date of booking</div>
+                      <div class="manageroom-basic-user-info-field-text" id="blocked_room_detail_fst_date_{{roomobj.id}}"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">date of expiry</div>
+                      <div class="manageroom-basic-user-info-field-text" id="blocked_room_detail_lst_date_{{roomobj.id}}"></div>
+                    </div>
+                  </div>
+                  <div class="manageroom-basic-data-detail-container-middle">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Advance Payment</div>
+                      <div class="manageroom-basic-user-info-field-text" id="blocked_room_detail_adv_amount_{{roomobj.id}}"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">payment ID</div>
+                      <div class="manageroom-basic-user-info-field-text" id="blocked_room_detail_payment_id_{{roomobj.id}}">
+                      </div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">
+                        <div class="manageroom-bacis-continue" onclick="blocked_room_allocate('{{roomobj.id}}')">register
+                        </div>
+                      </div>
+                      <div class="manageroom-basic-user-info-field-text"><input id="change_stay_time_{{roomobj.id}}" type="text" placeholder="Change Stay Time If Any" class="change-stay-time-field hidden"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="namegeroom-basic-header-go-data-detail">
+                  <div class="manageroom-rating-div hidden" id="manageroom_rating_container_{{roomobj.id}}">
+                    <h3 class="customer-feedback-heading">Customer's FeedBack</h3>
+                    <div class="manageroom-rating-div-final">
+                      <div class="feedback">
+                        <label class="angry">
+                          <input type="radio" value="1" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="mouth">
+                              <use xlink:href="#mouth">
+                            </svg>
+                          </div>
+                        </label>
+                        <label class="sad">
+                          <input type="radio" value="2" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="mouth">
+                              <use xlink:href="#mouth">
+                            </svg>
+                          </div>
+                        </label>
+                        <label class="ok">
+                          <input type="radio" value="3" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div></div>
+                        </label>
+                        <label class="good">
+                          <input type="radio" value="4" name="manageroom_feedback_{{roomobj.id}}" checked />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="mouth">
+                              <use xlink:href="#mouth">
+                            </svg>
+                          </div>
+                        </label>
+                        <label class="happy">
+                          <input type="radio" value="5" name="manageroom_feedback_{{roomobj.id}}" />
+                          <div>
+                            <svg class="eye left">
+                              <use xlink:href="#eye">
+                            </svg>
+                            <svg class="eye right">
+                              <use xlink:href="#eye">
+                            </svg>
+                          </div>
+                        </label>
+                      </div>
+
+                      <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 4" id="eye">
+                          <path
+                            d="M1,1 C1.83333333,2.16666667 2.66666667,2.75 3.5,2.75 C4.33333333,2.75 5.16666667,2.16666667 6,1">
+                          </path>
+                        </symbol>
+                        <symbol xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 7" id="mouth">
+                          <path d="M1,5.5 C3.66666667,2.5 6.33333333,1 9,1 C11.6666667,1 14.3333333,2.5 17,5.5"></path>
+                        </symbol>
+                      </svg>
+
+                    </div>
+                    <div>
+                      <div class="manageroom-bacis-continue" onclick="deallocate_room_final('{{roomobj.id}}')">
+                        Deallocate Now!</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+
+
+
+              <div class="manageroom-basic-data-detail" id="blocked_room_allocating_basic_container_{{roomobj.id}}">
+                <div class="manageroom-basic-data-detail-container">
+                  <div class="manageroom-basic-data-detail-container-first">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Customer Name</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="Jaykit Kukadiya" id="allocate_room_inp_name_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Price</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="500 In INR" id="allocate_room_inp_price_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Stay Time</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="1 In Days" id="allocate_room_inp_staytime_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                  </div>
+                  <div class="manageroom-basic-data-detail-container-middle">
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Document Type</div>
+                      <div class="manageroom-basic-user-info-field-text"> <input type="text" placeholder="Document Name" id="allocate_room_inp_documenttype_{{roomobj.id}}" class="allocateroom-inp-field"></div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">Document </div>
+                      <div class="manageroom-basic-user-info-field-text">
+                        <input type="file" id="allocate_room_inp_document_{{roomobj.id}}" class="allocateroom-inp-field hidden">
+                        <div class="manageroom-bacis-continue" onclick="allocate_document_trigger(event,'{{roomobj.id}}')" style=" white-space: nowrap;
+                        overflow: hidden;text-overflow: ellipsis; max-width: 150px;" id="allocate_room_inp_document_btn_{{roomobj.id}}">Choose Document</div>
+                      </div>
+                    </div>
+                    <div class="manageroom-basic-user-info-field-container">
+                      <div class="manageroom-basic-user-info-field-lable">
+                        <div class="manageroom-bacis-continue" onclick="allocate_room('{{roomobj.id}}')">allocate</div>
+                      </div>
+                      <div class="manageroom-basic-user-info-field-text"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="namegeroom-basic-header-go-data-detail">
+
+
+                </div>
+              </div>
+              {% endif %}
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+
+
+      </div>
+      <!-- manage room ends -->
+
+      <!-- profile page starts -->
+      <div class="profilepage-container hidden" id="profile_page">
+        <div class="profile-page">
+          <!-- <h2 class="profile-heading">Profile</h2> -->
+          <div class="profile-detail-container" id="profile_page_content">
+            <div class="profile-detail-img-outer-container">
+              <div style="position: relative;">
+                <div class="profile-detail-img-inner-container">
+                  <img class="profile-detail-img" id="profile_detail_img" src="/media/{{ user.user_detail.profileImg }}" alt="">
+                  <script>
+                    default_profile = "{{ user.user_detail.profileImg }}"
+                  </script>
+                  <img class="profile-update-pen" src="{% static 'icon/pen.png' %}" alt="" id="profile_img_update_btn">
+                  <div class="selec colleps profile_loder" id="profile_pic_upload_rounder">
+                    <div class="rounder">
+                      <span class="rounder-dots rd-filter" style="--loderPoints:1 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:2 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:3 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:4 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:5 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:6 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:7 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:8 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:9 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:10 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:11 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:12 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:13 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:14 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:15 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:16 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:17 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:18 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:19 "></span>
+                      <span class="rounder-dots rd-filter" style="--loderPoints:20 "></span>
+                    </div>
+                  </div>
+                  <input type="file" id="profile_detail_img_hidden_inp" class="hidden" accept="image/*">
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-field-container field-not-join">
+              <p class="detail-field-lable">
+                username
+              </p>
+              <div class="detail-field-inner-container">
+                <p class="detail-field-inner-container-info">
+                  {{user.username}}
+                </p>
+              </div>
+            </div>
+            <div class="detail-field-joiner">
+
+              <div class="detail-field-container">
+                <p class="detail-field-lable">
+                  first name
+                </p>
+                <div class="detail-field-inner-container">
+                  <p class="detail-field-inner-container-info">
+                    {{user.first_name}}
+                  </p>
+                </div>
+              </div>
+              <div class="detail-field-container">
+                <p class="detail-field-lable">
+                  last name
+                </p>
+                <div class="detail-field-inner-container">
+                  <p class="detail-field-inner-container-info">
+                    {{user.last_name}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="detail-field-container field-not-join">
+              <p class="detail-field-lable">
+                address
+              </p>
+              <div class="detail-field-inner-container">
+                <p class="detail-field-inner-container-info">
+                  {{user.user_detail.address}} - {{user.user_detail.pincode}}
+                </p>
+              </div>
+            </div>
+            <div class="detail-field-container field-not-join">
+              <p class="detail-field-lable">
+                mobile number
+              </p>
+              <div class="detail-field-inner-container p-0">
+                <!-- <p class="detail-field-inner-container-info">
+                  {{user.user_detail.mobile}}
+                </p> -->
+                <input class="detail-field-inner-container-info profile-form-input" type="text" disabled=true value="{{user.user_detail.mobile}}" id="profile_page_mobile_field" />
+                <img class="detail-field-update-pen" src="{% static 'icon/pen.png' %}" alt="" id="profile_page_mobile_field_btn">
+              </div>
+            </div>
+            <div class="detail-field-container field-not-join">
+              <p class="detail-field-lable">
+                email
+              </p>
+              <div class="detail-field-inner-container p-0">
+                <!-- <p class="detail-field-inner-container-info">
+                  {{user.email}}
+                </p> -->
+                <input class="detail-field-inner-container-info profile-form-input" type="email" disabled=true value="{{user.email}}" id="profile_page_email_field" />
+                <img class="detail-field-update-pen" src="{% static 'icon/pen.png' %}" alt="" id="profile_page_email_field_btn">
+              </div>
+            </div>
+            {% if not user.user_detail.location %}
+            <div class="profile-inner-btn" style="width: calc(100% - 10px);" onclick="choose_loc()" id="choose_loc_btn">Turn On Location Visibility On Platform</div>
+            {% else %}
+            <div class="profile-inner-btn" style="width: calc(100% - 10px);" onclick="choose_loc()" id="choose_loc_btn">Change Location</div>
+            {% endif %}
+            <div class="profile-inner-btn-container hidden" id="profile_submit_button">
+              <div class="profile-inner-btn" id="profile_save_btn">Save</div>
+              <div class="profile-inner-btn" id="profile_cancel_btn">Cancel</div>
+              <div class="selec colleps" id="profile_save_rounder">
+                <div class="rounder">
+                  <span class="rounder-dots rd-filter" style="--loderPoints:1 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:2 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:3 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:4 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:5 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:6 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:7 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:8 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:9 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:10 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:11 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:12 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:13 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:14 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:15 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:16 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:17 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:18 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:19 "></span>
+                  <span class="rounder-dots rd-filter" style="--loderPoints:20 "></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hidden google-map-container" id="choose_location_container">
+          </div>
+          <div class="location-selector-pop hidden" id="loc_save_box">
+            <div class="loc-info" id="see_loc"></div>
+            <div class="profile-inner-btn-container" style="width: 100%;justify-content: space-around;">
+              <div class="profile-inner-btn" onclick="save_loc()" id="loc_submit_btn">Save Location</div>
+              <div class="profile-inner-btn" onclick="cancel_loc()" id="loc_cancel_btn">Cancel</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- profile page ends -->
+
+      <!-- contact page starts -->
+      <div class="contact-container hidden" id="contact_page">
+
+        <div class="contact-page">
+
+          <div class="contact-main-container">
+            <div class="contact-first-container">
+              <h2 class="contact-heading">Contact Us</h2>
+              <hr style="width: 20%; border: 1px solid #5e84ff;">
+              <div class="contact-field-container">
+                <p class="contact-field-lable">
+                  Subject
+                </p>
+
+                <input class="contact-field-inner-container-info" type="text" id="contact_subject" />
+              </div>
+              <div class="contact-field-container">
+                <p class="contact-field-lable">
+                  E-mail
+                </p>
+                <input class="contact-field-inner-container-info" type="email" id="contact_email" />
+              </div>
+              <div class="contact-field-container">
+                <p class="contact-field-lable">
+                  Verification
+                </p>
+                <div class="contact-field-inner-container flx">
+                  <input class="contact-chackbox" type="checkbox" id="contact_not_robot">
+                  <p class="contact-not-robot-lable" id="conatct_not_robot">
+                    i am not robot
+                  </p>
+
+                </div>
+                <div class="contact_loader_container">
+                  <div class="selec hidden contact_loder" id="contact_submit_rounder">
+                    <div class="rounder">
+                      <span class="rounder-dots" style="--loderPoints:1"></span>
+                      <span class="rounder-dots" style="--loderPoints:2"></span>
+                      <span class="rounder-dots" style="--loderPoints:3"></span>
+                      <span class="rounder-dots" style="--loderPoints:4"></span>
+                      <span class="rounder-dots" style="--loderPoints:5"></span>
+                      <span class="rounder-dots" style="--loderPoints:6"></span>
+                      <span class="rounder-dots" style="--loderPoints:7"></span>
+                      <span class="rounder-dots" style="--loderPoints:8"></span>
+                      <span class="rounder-dots" style="--loderPoints:9"></span>
+                      <span class="rounder-dots" style="--loderPoints:10"></span>
+                      <span class="rounder-dots" style="--loderPoints:11"></span>
+                      <span class="rounder-dots" style="--loderPoints:12"></span>
+                      <span class="rounder-dots" style="--loderPoints:13"></span>
+                      <span class="rounder-dots" style="--loderPoints:14"></span>
+                      <span class="rounder-dots" style="--loderPoints:15"></span>
+                      <span class="rounder-dots" style="--loderPoints:16"></span>
+                      <span class="rounder-dots" style="--loderPoints:17"></span>
+                      <span class="rounder-dots" style="--loderPoints:18"></span>
+                      <span class="rounder-dots" style="--loderPoints:19"></span>
+                      <span class="rounder-dots" style="--loderPoints:20"></span>
+                    </div>
+                  </div>
+                  <p class="contact-alert-message hidden" id="contact_response_message">
+                    afa
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <!-- <hr style="border-top: 1px solid rgb(49, 49, 49);"> -->
+            <div class="contact-second-container">
+              <div>
+                <p class="contact-field-lable-message">
+                  Message
+                </p>
+              </div>
+              <textarea class="contact-field-textarea" id="contact_message" cols="30" placeholder="Write Text Here..." rows="10"></textarea>
+              <div class="contact-submit-btn" id="contact_submit_btn">Send Message</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- contact page ends -->
+
+
+       <!-- payment history page starts -->
+       <div class="contact-container hidden" id="payment_history_page">
+        <div class="payment-histroy-container-table">
+          
+          <div class="payment-history-page-container">
+
+            <!-- recent payments -->
+            <div class="payment-histroy-table-container" id="recent_payment_page">
+              <div class="payment-history-filter-container">
+                <!-- <div class="payment-filter-container"> -->
+                  <div class="filter-box">
+                    <div class="filter-pair">
+                      <div class="filter-pair-lable">
+                        <div class="filter-lable-container">Date Range</div>
+                        <input class="filter-inp-select" type="radio" name="time-filter" onclick="datefilterchange(1)" id="" value="date" checked>
+                      </div>
+                      <div class="filter-container">
+                        <div class="filter-inner-container">
+                          <span>From</span><input type="date" class="filter-date-inp" name="" id="time_filter_from" placeholder="From">
+                        </div>
+                        <div class="filter-inner-container">
+                          <span>To</span><input type="date" class="filter-date-inp" name="" id="time_filter_to" placeholder="From">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="filter-box">
+                    <div class="filter-pair">
+                      <div class="filter-pair-lable">
+                        <div class="filter-lable-container">Fix Range</div>
+                        <input class="filter-inp-select" type="radio" name="time-filter" onclick="datefilterchange(2)" value="fixed" id="">
+                      </div>
+                      <div class="filter-container">
+                        <select class="filter-select-inp" name="" id="fixed_selector" disabled>
+                          <option value="">SELECT THE RANGE</option>
+                          <option value="7">1 WEEK</option>
+                          <option value="30">1 MONTH</option>
+                          <option value="183">6 MONTHS</option>
+                          <option value="365">1 YEAR</option>
+                          <option value="730">2 YEARS</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="filter-box">
+                    <div class="filter-pair">
+                      <div class="filter-pair-lable">
+                        <div class="filter-lable-container">Status Filter</div>
+                        <input class="filter-inp-select" type="checkbox" onclick="filterselector('status_filter')" name="" id="status_filter" >
+                      </div>
+                      <div class="filter-container">
+                        <select class="filter-select-inp" name="" id="status_filter_selector" disabled>
+                          <option value="">SELECT THE STATUS</option>
+                          <option value="success">Success</option>
+                          <option value="fail">Fail</option>
+                          <option value="refunded">Refunded</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="filter-box">
+                    <div class="filter-pair">
+                      <div class="filter-pair-lable">
+                        <div class="filter-lable-container">Validity Filter</div>
+                        <input class="filter-inp-select" type="checkbox" onclick="filterselector('validity_filter')" name="" id="validity_filter">
+                      </div>
+                      <div class="filter-container">
+                        <select class="filter-select-inp" name="" id="validity_filter_selector" disabled>
+                          <option value="">SELECT THE VALIDITY</option>
+                          <option value="0">active</option>
+                          <option value="1">Expired</option>
+                          <option value="2">Availed</option>
+                          <option value="3">Suspended</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="filter-box">
+                    <div class="filter-pair">
+                      <div class="filter-pair-lable">
+                        <div class="filter-lable-container">Room Name Filter</div>
+                        <input class="filter-inp-select" type="checkbox" onclick="filterselector('name_filter')" name="" id="name_filter">
+                      </div>
+                      <div class="filter-container">
+                        <select class="filter-select-inp" name="" id="name_filter_selector" disabled>
+                          <option value="">SELECT THE ROOM</option>
+                          {% for roomobj in roomname %}
+                          <option value="{{roomobj.id}}">{{roomobj.room_name}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                <!-- </div> -->
+                <div class="payment-filter-btn-container">
+                  <div class="payment-filter-apply-btn" onclick="applyfilter()">Apply</div>
+                </div>
+              </div>
+              <table class="payment-histroy-table" id="payment_detail_table">
+                <tr>
+                  <th>Date & Time</th>
+                  <th>Payment Id</th>
+                  <th>Room Name</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>validity</th>
+                  <th style="resize: none; border: none;">      </th>
+                </tr>
+                {% for payobj in payment_data %}
+                  <tr>
+                    <td>{% getdate payobj %}</td>
+                    <td>{{payobj.payment_id}}</td>
+                    <td>{{payobj.room.room_name}}</td>
+                    <td>{{payobj.amount}}</td>
+                    <td>{{payobj.status}}</td>
+                    <td>{% getpayvalidity payobj %}</td>
+                    <td><div class="payment-query-btn" onclick="getpaymentdetail('{{payobj.id}}')">Detail</div></td>
+                  </tr>
+                {% endfor %}
+              </table>
+              <div id="apply_filter_rounder" class="hidden" style="width: 100%;display: grid;place-items: center;height: calc(100% - 141px);">
+                <div class="selec contact_loder" style="height: 65px; width: 65px;" >
+                  <div class="rounder">
+                    <span class="rounder-dots rd-filter" style="--loderPoints:1 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:2 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:3 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:4 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:5 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:6 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:7 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:8 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:9 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:10 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:11 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:12 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:13 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:14 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:15 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:16 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:17 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:18 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:19 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:20 "></span>
+                  </div>
+                </div>
+                
+              </div>
+              <div id="filter_message" class="hidden" style="width: 100%;display: grid;place-items: center;height: calc(100% - 141px); font-family: 'Roboto', sans-serif;font-size: 14px; color: lightgray;">Filter Message</div>
+            </div>
+
+            <!-- report -->
+            <!-- <div class="payment-histroy-table-container hidden" id="generate_report_page">report</div> -->
+
+            <!-- bank details -->
+            <div class="payment-histroy-table-container hidden" id="bank_detail_page"> 
+              <div class="bank-detail-top-container">
+                <div>
+                  {% if request.user.user_detail.bank_detail.onboarding_completed == "0" %}
+                    <div class="bank-connect-btn" onclick="bank_connect(event)">Connect Stripe Account</div>
+                    {% elif request.user.user_detail.bank_detail.onboarding_completed == "1" %}
+                    <div class="bank-connect-btn" onclick="bank_connect(event)">Process Stripe Account</div>
+                    {% elif request.user.user_detail.bank_detail.onboarding_completed == "2" %}
+                    <div class="bank-connect-btn" onclick="unlink_account(event)">Unlink Stripe Account</div>
+                    <a href="https://dashboard.stripe.com/payments" target="_blank"><div class="bank-connect-btn">Stripe Dashboard</div></a>
+                    <div class="bank-connect-btn" onclick="get_ac_detail(event)">Get Details</div>
+                  {% endif %}
+                  <p class="bank-connect-message hidden" id="bank_connect_message">messages</p>
+                </div>
+                {% if request.user.user_detail.bank_detail.onboarding_completed == "2" %}
+                <div class="bank-connect-message-id " id="bank_connect_message">{{request.user.user_detail.bank_detail.account_id}}<img onclick="copytxt(event)" class="copy-icon-bankid" src="{% static 'icon/edit.png' %}" alt=""></div>
+                {% endif %}
+              </div>
+              
+              {% if request.user.user_detail.bank_detail.onboarding_completed == "2" %}
+              <div id="bank_detail" class="bank-detail-outer-container">
+                <div class="bank-detail-inner-container">
+                  <div class="bank-detail-inner-container-heading">Bank Details</div>
+                  <select class="select-bank-inp" name="" id="bank_list_select">
+                    <option value="">----------------------</option>
+                  </select>
+                  <div class="bank-detail-detail-container">
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Account Id</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="stripe_account_id">: acct_1KkTKTSFvra9BELz</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">External Account Id</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="external_account_id">: acct_1KkTKTSFvra9BELz</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Account Holder</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="account_holder_name">: Jaykit kukadiya</div>
+                      <!-- <div class="bank-row-value-container-empty"></div> -->
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Bank Name</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="bank_name">: HDFC Private Limited</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Account Number</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="account_number">: XXXXXXXX7852</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Routing Number</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="account_routing">: IDGF582365</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Country</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="account_country">: IN</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Currency</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="account_currency">: INR</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Created At</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="account_created_at">: INR</div>
+                    </div>
+                  </div>
+                  <div class="bank-detail-inner-container-heading">Support Details</div>
+                  <div class="bank-detail-detail-container">
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Support Email</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="support_mail">: INR</div>
+                    </div>
+                    <div  class="bank-detail-row-container">
+                      <div  class="bank-row-lable-container">Support Number</div>
+                      <div class="bank-row-value-container bank-row-value-container-empty" id="support_contact">: INR</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bank-detail-inner-container-second">
+                  <div class="bank-inner-container">
+                    <div class="bank-inner-container-inner1">
+                      <div class="bank-detail-inner-container-heading">Payout Details</div>
+                      <div class="bank-detail-detail-container">
+                        <div  class="bank-detail-row-container">
+                          <div  class="bank-row-lable-container last-lable1">Statement Descriptor</div>
+                          <div class="bank-row-value-container bank-row-value-container-empty" id="account_statment_descriptor">: acct_1KkTKTSFvra9BELz</div>
+                        </div>
+                        <div  class="bank-detail-row-container">
+                          <div  class="bank-row-lable-container last-lable1">Payout Descriptor</div>
+                          <div class="bank-row-value-container bank-row-value-container-empty" id="account_payout_descriptor">: acct_1KkTKTSFvra9BELz</div>
+                        </div>
+                        <div  class="bank-detail-row-container">
+                          <div  class="bank-row-lable-container last-lable1">Payout Schedule</div>
+                          <div class="bank-row-value-container bank-row-value-container-empty" id="account_payout_schedule">: acct_1KkTKTSFvra9BELz</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bank-inner-container-inner2">
+                      <div class="bank-detail-inner-container-heading"></div>
+                      <div class="bank-detail-detail-container">
+                        <div  class="bank-detail-row-container">
+                          <div  class="bank-row-lable-container last-lable">Payout Enabled</div>
+                          <div class="bank-row-value-container bank-row-value-container-empty" id="account_payout_status">: acct_1KkTKTSFvra9BELz</div>
+                        </div>
+                        <div  class="bank-detail-row-container">
+                          <div  class="bank-row-lable-container last-lable">Payout Method</div>
+                          <div class="bank-row-value-container bank-row-value-container-empty" id="account_payout_method">: acct_1KkTKTSFvra9BELz</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bank-inner-container2">
+                    <div class="bank-detail-inner-container-heading">Balance Details</div>
+                    <div class="bank-inner-container">
+                      <div class="bank-inner-container-inner1">
+                        <div class="bank-detail-inner-container-heading">Panding Balance</div>
+                        <div class="bank-balance bank-row-value-container-empty"><span class="balance-count" id="account_panding_balance">16699</span><span class="balance-type">INR</span></div>
+                      </div>
+                      <div class="bank-inner-container-inner2">
+                        <div class="bank-detail-inner-container-heading">Available Balance</div>
+                        <div class="bank-balance bank-row-value-container-empty"><span class="balance-count" id="account_available_balance">160</span><span class="balance-type">INR</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="bank-inner-container2">
+                    <div class="bank-detail-inner-container-trs">
+                      <div class="bank-detail-inner-container-trs-heading">Recent Transections</div>
+                      <div class="bank-trs-controll-container">
+                        <div class="bank-connect-btn hidden" onclick="" id="tr_refund_btn">Refund Details</div>
+                        <select class="select-tr-inp" name="" id="tr_list_select">
+                          <option value="">----------------------</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="bank-inner-container" id="tr_payment_detail">
+                      <div class="bank-inner-container-inner1">
+                        <div class="bank-detail-detail-container">
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable1">Customer Name</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_cust_name">: Mayur Kukadiya</div>
+                          </div>
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable1">Refund Status</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_ref_status">: False</div>
+                          </div>
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable1">Payment Id</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_payment_id">: pi_1KkTKTSFvra9BELz</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bank-inner-container-inner2">
+                        <div class="bank-detail-detail-container">
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable">Amount Received</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_amount">: 779 INR</div>
+                          </div>
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable">Platform Fee</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_fee">: 155 INR</div>
+                          </div>
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable">Created At</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_created_at">: 4/3/2022, 6:48:57 PM</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="bank-inner-container hidden" id="tr_refund_detail">
+                      <div class="bank-inner-container-inner1">
+                        <div class="bank-detail-detail-container">
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable1">Refund Amount</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_refund_amount">: 4445 INR</div>
+                          </div>
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable1">Refund Id</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_ref_id">: re_dgfjhdgbdFSDFSfdfsfF</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="bank-inner-container-inner2">
+                        <div class="bank-detail-detail-container">
+                          <div  class="bank-detail-row-container">
+                            <div  class="bank-row-lable-container last-lable">Created at</div>
+                            <div class="bank-row-value-container bank-row-value-container-empty" id="tr_refund_created">: 4/3/2022, 6:48:57 PM</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+              {% else %}
+              <div style="width: 100%;display: grid;place-items: center;height: calc(100% - 30px);">
+                No Account Found!
+              </div>
+              <div id="bank_detail" style="display:none;"></div>
+              {% endif %}
+              <div id="bank_rounder" class="hidden" style="width: 100%;display: grid;place-items: center;height: calc(100% - 30px);">
+                <div class="selec contact_loder" style="height: 65px; width: 65px;" >
+                  <div class="rounder">
+                    <span class="rounder-dots rd-filter" style="--loderPoints:1 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:2 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:3 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:4 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:5 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:6 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:7 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:8 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:9 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:10 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:11 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:12 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:13 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:14 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:15 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:16 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:17 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:18 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:19 "></span>
+                    <span class="rounder-dots rd-filter" style="--loderPoints:20 "></span>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="payment-history-side-container">
+            <div class="payment-detail-btn" id="recent_payment_page_btn" >Recent Payment</div>
+            <!-- <div class="payment-detail-btn" id="generate_report_page_btn">Report</div> -->
+            <div class="payment-detail-btn" id="bank_detail_page_btn">Bank Details</div>
+          </div>
+          
+      </div>
+      <!-- payment history page ends -->
+
+
+    </div>
+  </div>
+
+  <!-- main page ends -->
+
+
+  <script src="{% static 'js/landlord_dashboard.js' %} "></script>
+  <script>
+    let pin_icon = location.protocol + '//' + location.host + "{% static 'icon/location.png' %}"
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false&callback=initMap">
+  </script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+
+</body>
+
+</html>

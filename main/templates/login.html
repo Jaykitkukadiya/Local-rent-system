@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  {% csrf_token %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <script src="{% static 'js/login.js' %}"></script>
+</head>
+
+<body>
+  <div class="navbar">
+    <img class="navbar-logo" src="{% static 'icon/lc1.svg' %}" alt="Logo">
+  </div>
+  <div class="bdy">
+    <div class="bdy-card">
+      <div class="bdy-card-menu-container">
+        <div class="bdy-card-menu" style="border-radius: 5px 0px 0px 0px;" id="login_selector">Login</div>
+        <div class="bdy-card-menu" style="border-radius: 0px 5px 0px 0px;" id="signup_selector">Signup</div>
+      </div>
+      <div class="bdy-card-bdy-contaier">
+        <div class="bdy-card-bdy-login hidd" id="login_container">
+          <p class="alert_messge" id="login_alert">hello</p>
+          <div class="inp-container">
+            <input class="inp-field" placeholder="Username" type="text" name="" id="username_login">
+            <p class="inp-lable">Username</p>
+          </div>
+          <div class="inp-container">
+            <input class="inp-field" placeholder="Password" type="password" name="" id="password_login">
+            <p class="inp-lable">password</p>
+          </div>
+          <p class="form-btn" id="login_btn">Login</p>
+          <p class="link">Forgot password?</p>
+
+        </div>
+        <div class="bdy-card-bdy-signup hidd" id="signup_container">
+          <div class="inp-container">
+            <input class="inp-field" id="signup_fullname" placeholder="Fullname" type="text" name="" id="">
+            <p class="inp-lable">Fullname</p>
+          </div>
+          <div class="inp-container">
+            <input class="inp-field" id="signup_email" placeholder="Email" type="text" name="" id="">
+            <p class="inp-lable">Email</p>
+          </div>
+          <div class="inp-container">
+            <input class="inp-field" id="signup_username" placeholder="Username" type="text" name="" id="">
+            <p class="inp-lable">Username</p>
+          </div>
+          <div class="inp-container">
+            <input class="inp-field" id="signup_password" placeholder="Password" type="password" name="" id="">
+            <p class="inp-lable">password</p>
+          </div>
+          <div class="inp-container landloard_filed">
+            <input class="inp-field" id="signup_mobile" placeholder="Mobile Number" type="text" name="" id="">
+            <p class="inp-lable">Mobile Number</p>
+          </div>
+          <div class="inp-container landloard_filed">
+            <textarea class="inp-field inp-field-address" placeholder="address" name="" id="signup_address"></textarea>
+            <p class="inp-lable">Address</p>
+          </div>
+          <div class="inp-container landloard_filed">
+            <input class="inp-field" id="signup_pincode" placeholder="Pincode" type="text" name="" id="">
+            <p class="inp-lable">Pincode</p>
+          </div>
+          <!-- <div class="checkbox-container">
+            <input type="checkbox" class="checkbox" id="is_landlord">
+            <p class="checkbox-lable">Are you landlord?</p>
+          </div> -->
+          <p class="form-btn" id="signup_btn">Signup</p>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

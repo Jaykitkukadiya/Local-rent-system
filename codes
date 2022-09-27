@@ -1,0 +1,8 @@
+# these codes identifies api resps
+
+405 : invalid method
+406 : invalid data/ not acceptable data
+404 : not found
+200 : success
+503 : Service Unavailable
+422 : unprocessable entity

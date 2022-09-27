@@ -1,0 +1,119 @@
+body{
+    width: 100%;
+    height: 100vh;
+    margin: 0px;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.initial-page-inner-container-success {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 20px);
+    padding: 10px;
+    opacity: 100%;
+    transition: all 0.5s linear;
+  }
+
+  .swipe-up {
+    opacity: 0%;
+    transform: translateX(400px);
+  }
+  
+  .swipe-up1 {
+    opacity: 0%;
+    transform: translateX(-400px);
+  }
+  .initial-page-success-text {
+    font-family: 'Roboto-Light', sans-serif;
+    font-size: 40px;
+    color: #525252;
+    margin: 10px;
+  }
+  .initial-page-success-recommandation {
+    margin: 20px 11px;
+    width: 299px;
+    text-align: center;
+    font-family: 'Roboto-Light', sans-serif;
+    font-size: 14px;
+    color: #525252;
+  }
+  .initial-page-success-btn {
+    padding: 12px 12px 12px 12px;
+    background-color: black;
+    border: 3px solid white;
+    height: 30px;
+    width: 30px;
+    transform: rotate(-90deg);
+    border-radius: 50%;
+    transition: all 0.1s linear;
+  }
+  
+  .hidden {
+    display: none !important;
+    opacity: 0%;
+  }
+  .initial-page-outer-container {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+  }
+
+  .payment-detail-container{
+    margin: 30px;
+    max-width: 300px;
+  }
+  .payment-inner-detail-container{
+    margin: 25px 5px;
+    max-width: 100%;
+    
+  }
+  .payment-lable{
+    font-family: 'Roboto-Light', sans-serif;
+    font-size: 15px;
+    color: #9c9c9c;
+    margin: 5px 0px;
+  }
+  .payment-value{
+    font-family: 'Roboto-Light', sans-serif;
+    font-size: 14px;
+    color: #3b3b3b;
+    line-height: 25px;
+    margin:5px;
+    margin-left: 50px;
+    word-wrap: break-word;
+    text-align: justify;
+    max-width: 100%;
+  }
+
+  .success-payment-btn-container{
+    display: flex;
+    justify-content: space-around;
+    width: 400px;
+  }
+  .success-payment-btn{
+    width: 170px;
+    text-align: center;
+    line-height: 40px;
+    color: white;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    user-select: none;
+  }
+  .success-payment-btn:hover{
+   background-color: #3b3b3b;
+  }
+    
+  .success-payment-btn:active{
+   background-color: #2e2e2e;
+  }
+    

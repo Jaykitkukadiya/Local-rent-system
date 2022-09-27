@@ -1,0 +1,90 @@
+body{
+    height: 100vh;
+    width: 100%;
+    margin: 0px;
+}
+.bdy{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none !important;
+    opacity: 0%;
+}
+
+a
+{
+    border: none;
+    text-decoration: none;
+    color:white;
+}
+  
+
+.message-box{
+    width: 400px;
+}
+.message-box-symbol-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+}
+.message-box-symbol{
+    height: 80px;
+}
+.message-box-text{
+    line-height: 25px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    color: #303030;
+    text-transform: capitalize;
+}
+.message-box-btn-container{
+    justify-content: center;
+    display: flex;
+}
+.message-box-btn{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    background: #919191;
+    margin: 10px 50px;
+    color: white;
+    line-height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s all ease-in;
+}
+.message-box-btn:hover{
+    background: #6b6b6b;
+}
+
+.redbtn{
+    background-color: rgb(255, 166, 166);
+}
+.redbtn:hover{
+    background-color: rgb(250, 124, 124);
+}
+
+.redtxt{
+    color: red;
+}
+
+.rounder span::before{
+    background-color: red !important;
+    width: calc(20px / 10) !important;
+    height: calc(20px / 10) !important;
+}
+
+.selec {
+    width: 60px !important;
+    height: 60px !important;
+}

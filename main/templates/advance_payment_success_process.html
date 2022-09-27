@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% csrf_token %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="{% static 'js/advance_payment_success_process.js' %}"></script>
+    <script>
+        var jwt = "{{jwt}}";
+    </script>
+    <link rel="stylesheet" href="{% static 'css/advance_payment_success_process.css' %}">
+</head>
+<body>
+    <div class="initial-page-outer-container">
+        <div class="initial-page-inner-container-success swipe-up1 hidden" id="initial_page_success">
+            <h2 class="initial-page-success-text">
+              Payment Successful
+            </h2>
+            <!-- <p class="initial-page-success-recommandation">
+              asfvshfdsg
+            </p> -->
+            <div class="payment-detail-container">
+                <div class="payment-inner-detail-container">
+                    <div class="payment-lable">E-mail</div>
+                    <div class="payment-value">{{email}}</div>
+                </div>
+                <div class="payment-inner-detail-container">
+                    <div class="payment-lable">Payment Id</div>
+                    <div class="payment-value">{{payment_id}}</div>
+                </div>
+                <div class="payment-inner-detail-container">
+                    <div class="payment-lable">Amount</div>
+                    <div class="payment-value">{{amount}} INR</div>
+                </div>
+
+            </div>
+      
+            <div class="success-payment-btn-container">
+                <a href="http://www.gmail.com/" target="_blank"><div class="success-payment-btn" >Check Gmail</div></a>
+                <div class="success-payment-btn" id="initial_page_dashboard_btn">Dashboard</div>
+            </div>
+          </div>
+    </div>
+</body>
+</html>

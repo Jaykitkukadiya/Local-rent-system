@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  {% csrf_token %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google-signin-client_id" content="36782399705-3u7lsedvcjubi2p6nrs6jclffl1luanb.apps.googleusercontent.com">
+  <!-- <meta name="google-signin-client_id" content="400116906598-fpt8m4djpo8fvc7g7a7qm755r3dfcv6i.apps.googleusercontent.com"> -->
+  <title>Home</title>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <script src="{% static 'js/home.js' %}"></script>
+</head>
+
+<body>
+
+  <div class="notification" id="notif">
+    <div class="noti-text" id="notif_txt">name</div>
+    <div class="noti-close" id="notif_close">close</div>
+  </div>
+  <div class="initial-page-outer-container">
+    <div class="initial-page-inner-container " id="initial_page_email">
+      <div class="initial-page-logo-container">
+        <!-- <div class="initial-page-grittings">welcome</div> -->
+        <img class="initial-page-logo" src="{% static 'icon/lc1.svg' %}" alt="">
+      </div>
+      <h2 class="initial-page-header">
+        get to access
+      </h2>
+      
+      <p class="initial-page-lable" id="email_lable_id">
+        Enter E-mail(required)
+      </p>
+      <div class="initial-page-field-container">
+        <img src="{% static 'icon/email.svg' %}" alt="" class="field-icon">
+        <input class="initial-page-field" type="email" id="initial_page_email_field">
+
+      </div>
+      <p id="have_code" class="have_code">
+        Have recent code ?
+      </p>
+      <div class="initial-page-btn" id="initial_page_email_field_btn">
+        Next
+      </div>
+      <div class="initial-page-btn-below-container">
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        <a href="/login/"><div class="initial-page-btn" id="initial_page_email_field_btn">
+          Landlord?
+        </div></a>
+      </div>
+      
+    </div>
+    <div class="initial-page-rounder-outer-container hidden" id="email_send_rounder">
+      <div class="selec  email_loder">
+        <div class="rounder">
+          <span class="rounder-dots" style="--loderPoints:1"></span>
+          <span class="rounder-dots" style="--loderPoints:2"></span>
+          <span class="rounder-dots" style="--loderPoints:3"></span>
+          <span class="rounder-dots" style="--loderPoints:4"></span>
+          <span class="rounder-dots" style="--loderPoints:5"></span>
+          <span class="rounder-dots" style="--loderPoints:6"></span>
+          <span class="rounder-dots" style="--loderPoints:7"></span>
+          <span class="rounder-dots" style="--loderPoints:8"></span>
+          <span class="rounder-dots" style="--loderPoints:9"></span>
+          <span class="rounder-dots" style="--loderPoints:10"></span>
+          <span class="rounder-dots" style="--loderPoints:11"></span>
+          <span class="rounder-dots" style="--loderPoints:12"></span>
+          <span class="rounder-dots" style="--loderPoints:13"></span>
+          <span class="rounder-dots" style="--loderPoints:14"></span>
+          <span class="rounder-dots" style="--loderPoints:15"></span>
+          <span class="rounder-dots" style="--loderPoints:16"></span>
+          <span class="rounder-dots" style="--loderPoints:17"></span>
+          <span class="rounder-dots" style="--loderPoints:18"></span>
+          <span class="rounder-dots" style="--loderPoints:19"></span>
+          <span class="rounder-dots" style="--loderPoints:20"></span>
+        </div>
+      </div>
+    </div>
+    <div class="initial-page-inner-container hidden" id="initial_page_auth">
+      <div class="second-page-logo-container">
+        <!-- <div class="initial-page-grittings">welcome</div> -->
+        <img class="second-page-logo" src="{% static 'icon/undo.png' %}" id="initial_page_auth_back" alt="">
+      </div>
+      <h3 class="second-page-header" id="initial_page_auth_email_indecator">
+        Jaykitkukadiya0@gmail.com
+      </h3>
+      <p class="initial-page-lable">
+        Enter Otp(required)
+      </p>
+      <div class=" initial-page-field-container ">
+        <!-- <img src="{% static 'icon/email.svg' %}" alt=" " class="field-icon "> -->
+        <input class="initial-page-field" placeholder="" type="text" id="initial_page_auth_otp_field">
+
+      </div>
+      <div class="initial-page-btn " id="initial_page_auth_otp_field_btn">
+        Next
+      </div>
+    </div>
+    <div class="initial-page-inner-container-success swipe-up1 hidden" id="initial_page_success">
+      <h2 class="initial-page-success-text">
+        Verification Complete
+      </h2>
+      <p class="initial-page-success-recommandation">
+        We are recommand you to use desktop while using services to experience smooth behaviour of UI
+      </p>
+
+      <img class="initial-page-success-btn" id="initial_page_success_btn" src=" {% static 'icon/arrow.png' %} " alt=" ">
+
+    </div>
+  </div>
+
+</body>
+
+</html>

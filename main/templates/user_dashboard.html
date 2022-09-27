@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  {% csrf_token %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>dashboard</title>
+  <link rel="stylesheet" href="{% static 'css/user_dashboard.css' %}">
+  <script src="{% static 'js/user_dashboard.js' %}"></script>
+   <!-- fonts  start-->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+   <!-- fonts end -->
+</head>
+
+<body>
+  <div class="nav">
+    <a href="/" style="height: var(--nav-height); display: flex; align-items: center;"><img src="{% static 'icon/lc1.svg' %}" alt="" class="logo"></a>
+    <div style="display:flex;">
+      <p class="notification-box-nothing">{{userobj.email}}</p>
+      <div class="nav-detail-btn-container" id="notification_container">
+        <img src="{% static 'icon/notification.png' %}"  class="notification-icon" id="notification_btn">
+        <div class="notification-box nofif_box_colleps hidden" id="notification_box">
+          <p class="notification-box-nothing">Nothing else</p>
+          <!-- <div class="notification-box-field">
+            <p class="notification-box-field-text">
+              email has been sent to your email address dfgfgdg dfg dfg df g dfg df g dfgdfggdfgdfgdfgdfgdf 
+            </p>
+            <img class="noti-close" onclick="this.parentElement.remove()" src="{% static 'icon/close-button.png' %}" alt="">
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bdy">
+    <div class="sidebar">
+      <div class="sidebar-section" id="payment_history_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/payment-method.png' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Payment History</p>
+      </div>
+      <div class="sidebar-section" id="booking_history_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/details.png' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Booking Details</p>
+      </div>
+      <!-- <div class="sidebar-section" id="profile_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/profile.png' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Profile</p>
+      </div> -->
+      <div class="sidebar-section" id="contact_page_btn">
+        <div class="sidebar-logo-container">
+          <img src="{% static 'icon/contactus.png' %}" alt="" class="logo-sidebar">
+        </div>
+        <p class="sidbar-btn">Contact Us</p>
+      </div>
+    </div>
+    <div class="page-container ">
+      <!-- payment page -->
+      <div class="payment-histroy-container hidden" id="payment_history_page">
+        
+        <div class="payment-histroy-container-table">
+          
+          <div class="payment-histroy-table-container">
+            <table class="payment-histroy-table" id="payment_detail_table">
+              <tr>
+                <th>Date & Time</th>
+                <th>Payment Id</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>validity</th>
+                <th style="resize: none; border: none;">      </th>
+              </tr>
+              <!-- <tr>
+                <td>fsfd</td>
+                <td>dsfsd</td>
+                <td>dsfsd</td>
+                <td>dsfsd</td>
+                <td>dsfsd</td>
+                <td><div class="payment-query-btn">Query</div></td>
+              </tr> -->
+              
+            </table>
+          </div>
+          
+        </div>
+
+
+      
+
+      
+        
+      
+      </div>
+      <!-- booking page -->
+      <div class="booking-history-container " id="booking_history_page">
+
+
+        <div class="booking-history-outer-container"> 
+          <div class="booking-history-panding-container">
+            <div class="booking-history-panding-table-container">
+               <div class="booking-history-heading">Panding Booking</div>
+               <hr style="width: 15%; margin: 0px 25px; border: 1px solid #000000;">
+               <div class="booking-details-fixed-container">
+                  <div class="booking-detail-row-container-panding">
+                    <div class="booking-detail-row">
+                      <div class="booking-detail-row-element table-header">Address</div>
+                      <div class="booking-detail-row-element table-header">Due date</div>
+                      <div class="booking-detail-row-element table-header">direction</div>
+                      <div class="booking-detail-row-element table-header">Details</div>
+                    </div>
+                    <div class="booking-detail-row-container" id="panding_booking_container">
+                      <!-- <div class="booking-detail-row-inner-container">
+                        <div class="booking-detail-row">
+                          <div class="booking-detail-row-element eclip" id="row_addr_3">c-803, blossom homes,abc circle,motavarachha,surat</div>
+                          <div class="booking-detail-row-element">10 sep 2022 15:08:22</div>
+                          <div class="booking-detail-row-element"><a href="">Click Here</a></div>
+                          <div class="booking-detail-row-element tab-btn" onclick="loadmoredetail(event , 3)">detail</div>
+                        </div>
+                        <div class="booking-more-detail colleps  " id="booking_more_outer_3">
+                          <div id="booking_more_inner_3" class=" booking-detail-inner hidden fadout">   
+                            <div class="booking-more-detail-first">
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner name</div>
+                                <div class="booking-more-value">: mayur kukadiya</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner Contact</div>
+                                <div class="booking-more-value">: 7878333205</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner email</div>
+                                <div class="booking-more-value">: mayurkukadiya0@gmail.com</div>
+                              </div>
+                              <div class="mid-line"></div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room name</div>
+                                <div class="booking-more-value">: room 2</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room rating</div>
+                                <div class="booking-more-value">: 5 stars</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room price</div>
+                                <div class="booking-more-value">: 150 INR</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">advanced payment</div>
+                                <div class="booking-more-value">: 69 INR</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room status</div>
+                                <div class="booking-more-value">: blocked</div>
+                              </div>
+                            </div>
+                            <div class="booking-more-detail-second" >
+                              
+                              <div style="overflow: scroll; width: 100%; max-height: 90px;">
+                                <div class="booking-more-facility-container">
+                                  <div>1 bedroom</div> 
+                                  <div>1 table</div> 
+                                  <div>Ac</div> 
+                                  <div>1 toilat</div> 
+                                  <div>1 car parking</div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>bonfire</div> 
+                                </div>
+                              </div>
+                              <div style="overflow: scroll; width: 100%; max-height: 150px">
+                                <div class="booking-more-facility-container">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/sampleroom.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/sampleroom.jpg' %}" alt="">
+                                </div>
+                              </div>
+                            
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+                      
+                      
+                    </div>
+                  </div>
+               </div>
+            </div>
+          </div>
+          <div class="booking-history-container-other-container">
+            <div class="booking-history-container-confirmed">
+              <div class="booking-history-confirmed-table-container">
+                <div class="booking-history-heading">Completed Booking</div> 
+                <hr style="width: 15%; margin: 0px 25px; border: 1px solid #000000;">
+                <div class="booking-details-fixed-container">
+                  <div class="booking-detail-row-container-panding">
+                    <div class="booking-detail-row">
+                      <div class="booking-detail-row-element table-header">Address</div>
+                      <div class="booking-detail-row-element table-header">Due date</div>
+                      <div class="booking-detail-row-element table-header">direction</div>
+                      <div class="booking-detail-row-element table-header">Details</div>
+                    </div>
+                    <div class="booking-detail-row-container" id="completed_booking_container">
+
+                      <!-- <div class="booking-detail-row-inner-container">
+                        <div class="booking-detail-row">
+                          <div class="booking-detail-row-element eclip" id="row_addr_3">c-803, blossom homes,abc circle,motavarachha,surat</div>
+                          <div class="booking-detail-row-element">10 sep 2022 15:08:22</div>
+                          <div class="booking-detail-row-element"><a href="">Click Here</a></div>
+                          <div class="booking-detail-row-element tab-btn" onclick="loadmoredetail(event , 3)">detail</div>
+                        </div>
+                        <div class="booking-more-detail colleps  " id="booking_more_outer_3">
+                          <div id="booking_more_inner_3" class=" booking-detail-inner hidden fadout">   
+                            <div class="booking-more-detail-first">
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner name</div>
+                                <div class="booking-more-value">: mayur kukadiya</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner Contact</div>
+                                <div class="booking-more-value">: 7878333205</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner email</div>
+                                <div class="booking-more-value">: mayurkukadiya0@gmail.com</div>
+                              </div>
+                              <div class="mid-line"></div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room name</div>
+                                <div class="booking-more-value">: room 2</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room rating</div>
+                                <div class="booking-more-value">: 5 stars</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room price</div>
+                                <div class="booking-more-value">: 150 INR</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">advanced payment</div>
+                                <div class="booking-more-value">: 69 INR</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room status</div>
+                                <div class="booking-more-value">: blocked</div>
+                              </div>
+                            </div>
+                            <div class="booking-more-detail-second" >
+                              
+                              <div style="overflow: scroll; width: 100%; max-height: 90px;">
+                                <div class="booking-more-facility-container">
+                                  <div>1 bedroom</div> 
+                                  <div>1 table</div> 
+                                  <div>Ac</div> 
+                                  <div>1 toilat</div> 
+                                  <div>1 car parking</div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>bonfire</div> 
+                                </div>
+                              </div>
+                              <div style="overflow: scroll; width: 100%; max-height: 150px">
+                                <div class="booking-more-facility-container">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/sampleroom.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/sampleroom.jpg' %}" alt="">
+                                </div>
+                              </div>
+                            
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>   -->
+                      
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="booking-history-container-expired">
+              <div class="booking-history-expired-tablecontainer">
+                 <div class="booking-history-heading">Expired Booking</div>
+                 <hr style="width: 15%; margin: 0px 25px; border: 1px solid #000000;">
+                 <div class="booking-details-fixed-container">
+                   
+                
+                    <div class="booking-detail-row">
+                      <div class="booking-detail-row-element table-header">Address</div>
+                      <div class="booking-detail-row-element table-header">Due date</div>
+                      <div class="booking-detail-row-element table-header">direction</div>
+                      <div class="booking-detail-row-element table-header">Details</div>
+                    </div>
+                    <div class="booking-detail-row-container" id="expired_booking_container">
+
+                      <!-- <div class="booking-detail-row-inner-container">
+                        <div class="booking-detail-row">
+                          <div class="booking-detail-row-element eclip" id="row_addr_3">c-803, blossom homes,abc circle,motavarachha,surat</div>
+                          <div class="booking-detail-row-element">10 sep 2022 15:08:22</div>
+                          <div class="booking-detail-row-element"><a href="">Click Here</a></div>
+                          <div class="booking-detail-row-element tab-btn" onclick="loadmoredetail(event , 4)">detail</div>
+                        </div>
+                        <div class="booking-more-detail colleps  " id="booking_more_outer_4">
+                          <div id="booking_more_inner_4" class=" booking-detail-inner hidden fadout">   
+                            <div class="booking-more-detail-first">
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner name</div>
+                                <div class="booking-more-value">: mayur kukadiya</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner Contact</div>
+                                <div class="booking-more-value">: 7878333205</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">owner email</div>
+                                <div class="booking-more-value">: mayurkukadiya0@gmail.com</div>
+                              </div>
+                              <div class="mid-line"></div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room name</div>
+                                <div class="booking-more-value">: room 2</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room rating</div>
+                                <div class="booking-more-value">: 5 stars</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room price</div>
+                                <div class="booking-more-value">: 150 INR</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">advanced payment</div>
+                                <div class="booking-more-value">: 69 INR</div>
+                              </div>
+                              <div class="booking-more-row">
+                                <div class="booking-more-lable">room status</div>
+                                <div class="booking-more-value">: blocked</div>
+                              </div>
+                            </div>
+                            <div class="booking-more-detail-second" >
+                              
+                              <div style="overflow: scroll; width: 100%; max-height: 90px;">
+                                <div class="booking-more-facility-container">
+                                  <div>1 bedroom</div> 
+                                  <div>1 table</div> 
+                                  <div>Ac</div> 
+                                  <div>1 toilat</div> 
+                                  <div>1 car parking</div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>free dinner </div> 
+                                  <div>bonfire</div> 
+                                </div>
+                              </div>
+                              <div style="overflow: scroll; width: 100%; max-height: 150px">
+                                <div class="booking-more-facility-container">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/sampleroom.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/back.jpg' %}" alt="">
+                                  <img class="booking-more-room-photo" src="{% static 'photos/sampleroom.jpg' %}" alt="">
+                                </div>
+                              </div>
+                            
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>  -->
+                      
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!-- profile page -->
+      <div class="profile-detail-container hidden" id="profile_page">3</div>
+      <!-- contact page -->
+      <div class="contact-container hidden" id="contact_page">
+
+        <div class="contact-page">
+
+          <div class="contact-main-container">
+            <div class="contact-first-container">
+              <h2 class="contact-heading">Contact Us</h2>
+              <hr style="width: 20%; margin: 0px; border: 1px solid #000000;">
+              <div class="contact-field-container">
+                <p class="contact-field-lable">
+                  Subject
+                </p>
+
+                <input class="contact-field-inner-container-info" type="text" id="contact_subject" />
+              </div>
+              <div class="contact-field-container">
+                <p class="contact-field-lable">
+                  E-mail
+                </p>
+                <input class="contact-field-inner-container-info" type="email" id="contact_email" />
+              </div>
+              <div class="contact-field-container">
+                <p class="contact-field-lable">
+                  Verification
+                </p>
+                <div class="contact-field-inner-container flx">
+                  <input class="contact-chackbox" type="checkbox" id="contact_not_robot">
+                  <p class="contact-not-robot-lable" id="conatct_not_robot">
+                    i am not robot
+                  </p>
+
+                </div>
+                <div class="contact_loader_container">
+                  <div class="selec hidden contact_loder" id="contact_submit_rounder">
+                    <div class="rounder">
+                      <span class="rounder-dots" style="--loderPoints:1"></span>
+                      <span class="rounder-dots" style="--loderPoints:2"></span>
+                      <span class="rounder-dots" style="--loderPoints:3"></span>
+                      <span class="rounder-dots" style="--loderPoints:4"></span>
+                      <span class="rounder-dots" style="--loderPoints:5"></span>
+                      <span class="rounder-dots" style="--loderPoints:6"></span>
+                      <span class="rounder-dots" style="--loderPoints:7"></span>
+                      <span class="rounder-dots" style="--loderPoints:8"></span>
+                      <span class="rounder-dots" style="--loderPoints:9"></span>
+                      <span class="rounder-dots" style="--loderPoints:10"></span>
+                      <span class="rounder-dots" style="--loderPoints:11"></span>
+                      <span class="rounder-dots" style="--loderPoints:12"></span>
+                      <span class="rounder-dots" style="--loderPoints:13"></span>
+                      <span class="rounder-dots" style="--loderPoints:14"></span>
+                      <span class="rounder-dots" style="--loderPoints:15"></span>
+                      <span class="rounder-dots" style="--loderPoints:16"></span>
+                      <span class="rounder-dots" style="--loderPoints:17"></span>
+                      <span class="rounder-dots" style="--loderPoints:18"></span>
+                      <span class="rounder-dots" style="--loderPoints:19"></span>
+                      <span class="rounder-dots" style="--loderPoints:20"></span>
+                    </div>
+                  </div>
+                  <p class="contact-alert-message hidden" id="contact_response_message">
+                    afa
+                  </p>
+
+                </div>
+              </div>
+            </div>
+            <!-- <hr style="border-top: 1px solid rgb(49, 49, 49);"> -->
+            <div class="contact-second-container">
+              <div>
+                <p class="contact-field-lable-message">
+                  Message
+                </p>
+              </div>
+              <textarea class="contact-field-textarea" id="contact_message" cols="30" placeholder="Write Text Here..." rows="10"></textarea>
+              <div class="contact-submit-btn" id="contact_submit_btn">Send Message</div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+  <div class="size-info">
+    Minimum width is tobe maintain is 1200px
+  </div>
+
+</body>
